@@ -1,60 +1,51 @@
-import React from 'react';
-import NavItem from './NavItem';
-import NavDropdown from './NavDropdown';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import './Header.css';
+import { Menu, Icon, Layout } from 'antd';
 
-const Header = () => {
+const { SubMenu } = Menu;
+const { Header } = Layout;
+
+const HeaderMenu = props => {
+  const { location, currentUser } = props;
+
+  let menuItems;
+  let menuClass = 'app-menu';
+  if (currentUser) {
+    menuItems = [
+      <Menu.Item key="/">
+        <Link to="/">
+          <Icon type="home" className="nav-icon" />
+        </Link>
+      </Menu.Item>,
+      <Menu.Item key="/poll/new">
+        <Link to="/poll/new">Nuevo</Link>
+      </Menu.Item>,
+    ];
+  } else {
+    menuItems = [
+      <Menu.Item key="/login">
+        <Link to="/login">Login</Link>
+      </Menu.Item>,
+      <Menu.Item key="/signup">
+        <Link to="/signup">Signup</Link>
+      </Menu.Item>,
+    ];
+    menuClass = 'app-menu app-menu-right';
+  }
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a className="navbar-brand" href="/">
-        Navbar
-      </a>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          <NavItem path="/" name="Home" />
-          <NavItem path="/page2" name="Page2" />
-          <NavItem path="/page3" name="Disabled" disabled="true" />
-          <NavDropdown name="Dropdown">
-            <a className="dropdown-item" href="/">
-              Action
-            </a>
-            <a className="dropdown-item" href="/">
-              Another action
-            </a>
-            <div className="dropdown-divider"></div>
-            <a className="dropdown-item" href="/">
-              Something else here
-            </a>
-          </NavDropdown>
-        </ul>
-        <form className="form-inline my-2 my-lg-0">
-          <input
-            className="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button
-            className="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-          >
-            Search
-          </button>
-        </form>
+    <Header>
+      <div className="container-header">
+        <div className="app-title">
+          <Link to="/">Bufete Legal</Link>
+        </div>
+        <Menu className={menuClass} mode="horizontal" style={{ lineHeight: '64px' }} theme="dark">
+          {menuItems}
+        </Menu>
       </div>
-    </nav>
+    </Header>
   );
 };
 
-export default Header;
+export default HeaderMenu;

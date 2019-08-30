@@ -1,17 +1,23 @@
 import React from 'react';
-import Header from '../common/Header';
-import Footer from '../common/Footer';
+import { Route, withRouter, Switch } from 'react-router-dom';
+import { Layout } from 'antd';
+import HeaderMenu from '../common/Header';
+import FooterComponent from '../common/Footer';
+
+const { Content } = Layout;
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <div className="container">
-        <h1>Hello React, Webpack 4 & Babel 7!</h1>
-      </div>
-      <Footer />
-    </div>
+    <Layout className="layout">
+      <HeaderMenu pathname="/" />
+      <Content>
+        <div>
+          <h1>Hello React, Webpack 4 & Babel 7!</h1>
+        </div>
+      </Content>
+      <FooterComponent />
+    </Layout>
   );
 };
 
-export default App;
+export default withRouter(App);

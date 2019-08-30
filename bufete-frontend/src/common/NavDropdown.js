@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 
 const NavDropdown = props => {
   const [isToggleOn, setToggle] = useState(false);
+  const { name, children } = props;
 
   const showDropdown = e => {
     e.preventDefault();
-    setToggle(prevState => !prevState.isToggleOn);
+    setToggle(prevState => !prevState);
   };
 
-  const classDropdownMenu = 'dropdown-menu' + (isToggleOn ? ' show' : '');
+  const classDropdownMenu = `dropdown-menu${isToggleOn ? ' show' : ''}`;
 
   return (
     <li className="nav-item dropdown">
@@ -24,10 +25,10 @@ const NavDropdown = props => {
           showDropdown(e);
         }}
       >
-        {props.name}
+        {name}
       </a>
       <div className={classDropdownMenu} aria-labelledby="navbarDropdown">
-        {props.children}
+        {children}
       </div>
     </li>
   );

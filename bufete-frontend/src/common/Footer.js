@@ -1,4 +1,7 @@
 import React from 'react';
+import { Layout } from 'antd';
+
+const { Footer } = Layout;
 
 const footerClass = {
   position: 'fixed',
@@ -6,20 +9,16 @@ const footerClass = {
   paddingTop: '1em',
   width: '100%',
   color: 'white',
+  textAlign: 'center',
+  background: '#001529',
 };
 
-function Footer() {
+function FooterComponent() {
   return (
-    <footer className="footer mt-auto py-3 navbar-light bg-dark" style={footerClass}>
-      <div className="container mx-auto text-center">
-        <b>Version</b> 1.0.0{' '}
-        <strong>
-          Copyright © 2014-2019 <a href="/">jarroyo</a>.
-        </strong>{' '}
-        All rights reserved.
-      </div>
-    </footer>
+    <Footer style={footerClass} theme="dark">
+      Bufete Legar ©2019 Created by jarroyo
+    </Footer>
   );
 }
 
-export default Footer;
+export default FooterComponent;
