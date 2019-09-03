@@ -16,7 +16,7 @@ const footerClass = {
 function FooterComponent() {
   return (
     <Footer style={footerClass} theme="dark">
-      Bufete Legar ©2019 Created by jarroyo
+      Bufete Legal ©2019 Created by jarroyo
     </Footer>
   );
 }

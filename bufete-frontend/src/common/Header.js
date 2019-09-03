@@ -1,51 +1,31 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 import './Header.css';
-import { Menu, Icon, Layout } from 'antd';
+import LeftMenu from '../menu/LeftMenu';
+import RightMenu from '../menu/RightMenu';
 
-const { SubMenu } = Menu;
-const { Header } = Layout;
+const AppHeader = props => {
+  const { currentUser } = props;
 
-const HeaderMenu = props => {
-  const { location, currentUser } = props;
-
-  let menuItems;
-  let menuClass = 'app-menu';
-  if (currentUser) {
-    menuItems = [
-      <Menu.Item key="/">
-        <Link to="/">
-          <Icon type="home" className="nav-icon" />
-        </Link>
-      </Menu.Item>,
-      <Menu.Item key="/poll/new">
-        <Link to="/poll/new">Nuevo</Link>
-      </Menu.Item>,
-    ];
-  } else {
-    menuItems = [
-      <Menu.Item key="/login">
-        <Link to="/login">Login</Link>
-      </Menu.Item>,
-      <Menu.Item key="/signup">
-        <Link to="/signup">Signup</Link>
-      </Menu.Item>,
-    ];
-    menuClass = 'app-menu app-menu-right';
-  }
+  const handleMenuClick = ({ key }) => {
+    if (key === 'logout') {
+      props.onLogout();
+    }
+  };
 
   return (
-    <Header>
-      <div className="container-header">
-        <div className="app-title">
-          <Link to="/">Bufete Legal</Link>
-        </div>
-        <Menu className={menuClass} mode="horizontal" style={{ lineHeight: '64px' }} theme="dark">
-          {menuItems}
-        </Menu>
+    <div className="menuBar">
+      <div className="logo">
+        <a href="/">Bufete Legal</a>
       </div>
-    </Header>
+      <div className="menuCon">
+        <div className="leftMenu">{currentUser && <LeftMenu />}</div>
+        <div className="rightMenu">
+          <RightMenu currentUser={currentUser} handleMenuClick={handleMenuClick} />
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default HeaderMenu;
+export default withRouter(AppHeader);
