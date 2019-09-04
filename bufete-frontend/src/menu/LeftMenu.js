@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 
 const { SubMenu } = Menu;
 
-const LeftMenu = () => {
+const LeftMenu = props => {
+  const { location } = props;
   const menuItems = [
     <SubMenu
       key="menu:1"
@@ -97,7 +98,7 @@ const LeftMenu = () => {
   ];
 
   return (
-    <Menu mode="horizontal" theme="dark">
+    <Menu mode="horizontal" theme="dark" selectedKeys={[location.pathname]}>
       {menuItems}
     </Menu>
   );

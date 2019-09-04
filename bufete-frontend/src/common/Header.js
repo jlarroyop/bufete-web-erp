@@ -5,8 +5,7 @@ import LeftMenu from '../menu/LeftMenu';
 import RightMenu from '../menu/RightMenu';
 
 const AppHeader = props => {
-  const { currentUser } = props;
-
+  const { currentUser, location } = props;
   const handleMenuClick = ({ key }) => {
     if (key === 'logout') {
       props.onLogout();
@@ -14,16 +13,20 @@ const AppHeader = props => {
   };
 
   return (
-    <div className="menuBar">
+    <div className="menuBar" style={{ overflow: 'unset' }}>
       <div className="logo">
         <a href="/">Bufete Legal</a>
       </div>
-      <div className="menuCon">
-        <div className="leftMenu">{currentUser && <LeftMenu />}</div>
-        <div className="rightMenu">
-          <RightMenu currentUser={currentUser} handleMenuClick={handleMenuClick} />
+      {currentUser && (
+        <div className="menuCon">
+          <div className="leftMenu">
+            <LeftMenu location={location} />
+          </div>
+          <div className="rightMenu">
+            <RightMenu currentUser={currentUser} handleMenuClick={handleMenuClick} />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

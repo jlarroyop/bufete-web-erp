@@ -11,6 +11,8 @@ import FooterComponent from '../common/Footer';
 import LoadingIndicator from '../common/LoadingIndicator';
 import Home from '../home/Home';
 import Login from '../user/login/Login';
+import NotFound from '../common/NotFound';
+import PrivateRoute from '../common/PrivateRoute';
 
 const { Content } = Layout;
 
@@ -71,18 +73,13 @@ const App = props => {
 
   return (
     <Layout className="app-container" style={{ backgroundColor: 'white' }}>
-      <AppHeader pathname="/" isAuthenticated={isAuthenticated} currentUser={currentUser} onLogout={handleLogout} />
+      <AppHeader isAuthenticated={isAuthenticated} currentUser={currentUser} onLogout={handleLogout} />
       <Content className="app-content">
         <div className="container">
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={contProps => {
-                return <Home isAuthenticated={isAuthenticated} currentUser={currentUser} handleLogout={handleLogout} {...contProps} />;
-              }}
-            />
+            <PrivateRoute authenticated={isAuthenticated} path="/" exact component={Home} handleLogout={handleLogout} />
             <Route path="/login" render={contProps => <Login onLogin={handleLogin} {...contProps} />} />
+            <Route component={NotFound} />
           </Switch>
         </div>
       </Content>
