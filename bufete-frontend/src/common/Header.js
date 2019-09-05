@@ -11,7 +11,6 @@ const AppHeader = props => {
       props.onLogout();
     }
   };
-
   return (
     <div className="menuBar" style={{ overflow: 'unset' }}>
       <div className="logo">

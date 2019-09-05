@@ -53,14 +53,14 @@ const App = props => {
     props.history.push(redirectTo);
 
     notification[notificationType]({
-      message: 'Polling App',
+      message: 'Bufete App',
       description,
     });
   };
 
   const handleLogin = () => {
     notification.success({
-      message: 'Polling App',
+      message: 'Bufete App',
       description: "You're successfully logged in.",
     });
     loadCurrentUser();
