@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.bufete.backend.exception.AppException;
-import com.bufete.backend.model.Role;
-import com.bufete.backend.model.RoleName;
+import com.bufete.backend.model.StatusName;
+// import com.bufete.backend.exception.AppException;
+// import com.bufete.backend.model.Role;
 import com.bufete.backend.model.User;
 import com.bufete.backend.payload.ApiResponse;
 import com.bufete.backend.payload.JwtAuthenticationResponse;
@@ -28,7 +28,7 @@ import com.bufete.backend.security.JwtTokenProvider;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Collections;
+// import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -79,14 +79,14 @@ public class AuthController {
 
         // Creating user's account
         User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
-                signUpRequest.getEmail(), signUpRequest.getPassword());
+                signUpRequest.getEmail(), signUpRequest.getPassword(), StatusName.ACTIVE);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-                .orElseThrow(() -> new AppException("User Role not set."));
+        // Role userRole = roleRepository.findByName("ROLE_VIEW")
+        //         .orElseThrow(() -> new AppException("User Role not set."));
 
-        user.setRoles(Collections.singleton(userRole));
+        // user.setRoles(Collections.singleton(userRole));
 
         User result = userRepository.save(user);
 

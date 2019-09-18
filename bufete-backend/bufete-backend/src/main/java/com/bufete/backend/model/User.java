@@ -1,6 +1,5 @@
 package com.bufete.backend.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -39,16 +38,20 @@ public class User extends DateAudit {
 	@Size(max = 100)
 	private String password;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles = new HashSet<>();
+	@Enumerated(EnumType.STRING)
+	@Column(length = 10)
+	private StatusName status;
 
-	public User(String name, String username, String email, String password) {
+	@OneToMany(mappedBy = "user")
+	private Set<RoleAssign> roleAssigns;
+
+	public User(String name, String username, String email, String password, StatusName status) {
 		super();
 		this.name = name;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.status = status;
 	}
 
 	public User() {
@@ -95,14 +98,21 @@ public class User extends DateAudit {
 		this.password = password;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public Set<RoleAssign> getRoleAssigns() {
+		return roleAssigns;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRoleAssigns(Set<RoleAssign> roleAssigns) {
+		this.roleAssigns = roleAssigns;
+	}
+
+	public StatusName getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusName status) {
+		this.status = status;
 	}
 
 	private static final long serialVersionUID = 1L;
-
 }
