@@ -22,21 +22,23 @@ public class UserRepositoryTest {
   @Autowired
   private UserRepository userRepository;
 
-  @Test
-  public void testSaveUser() {
+  private User createUser() {
     User user = new User("Jorge Arroyo", "jarroyo", "jlarroyop@gmail.com", "SiPues00$$.", StatusName.ACTIVE);
     user.setCreatedAt(Instant.now());
     user.setUpdatedAt(Instant.now());
     userRepository.save(user);
+    return user;
+  }
+
+  @Test
+  public void testSaveUser() {
+    User user = createUser();
     assertNotNull(user);
   }
 
   @Test
-  public void testGetUser(){
-    User user = new User("Jorge Arroyo", "jarroyo", "jlarroyop@gmail.com", "SiPues00$$.", StatusName.ACTIVE);
-    user.setCreatedAt(Instant.now());
-    user.setUpdatedAt(Instant.now());
-    userRepository.save(user);
+  public void testGetUser() {
+    User user = createUser();
     assertNotNull(user);
 
     User user2 = userRepository.findByUsername(user.getUsername()).get();
@@ -45,28 +47,19 @@ public class UserRepositoryTest {
 
   @Test
   public void testDeleteRole() {
-    User user = new User("Jorge Arroyo", "jarroyo", "jlarroyop@gmail.com", "SiPues00$$.", StatusName.ACTIVE);
-    user.setCreatedAt(Instant.now());
-    user.setUpdatedAt(Instant.now());
-    userRepository.save(user);
+    User user = createUser();
     userRepository.delete(user);
   }
 
   @Test
   public void findAllUsers() {
-    User user = new User("Jorge Arroyo", "jarroyo", "jlarroyop@gmail.com", "SiPues00$$.", StatusName.ACTIVE);
-    user.setCreatedAt(Instant.now());
-    user.setUpdatedAt(Instant.now());
-    userRepository.save(user);
+    createUser();
     assertNotNull(userRepository.findAll());
   }
 
   @Test
   public void deleteByUserIdTest() {
-    User user = new User("Jorge Arroyo", "jarroyo", "jlarroyop@gmail.com", "SiPues00$$.", StatusName.ACTIVE);
-    user.setCreatedAt(Instant.now());
-    user.setUpdatedAt(Instant.now());
-    User user2 = userRepository.save(user);
+    User user2 = createUser();
     userRepository.deleteById(user2.getId());
   }
 }

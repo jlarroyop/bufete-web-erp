@@ -1,6 +1,7 @@
 package com.bufete.backend.RepositoryTest;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
 
 import java.time.Instant;
 
@@ -21,8 +22,7 @@ public class CompanyRepositoryTest {
   @Autowired
   private CompanyRepository companyRepository;
 
-  @Test
-  public void testCreateCompany() {
+  private Company createCompany() {
     Long userId = (long) 1;
     Company company = new Company("Industria La Popular", StatusName.ACTIVE);
     company.setCreatedAt(Instant.now());
@@ -30,6 +30,40 @@ public class CompanyRepositoryTest {
     company.setCreatedBy(userId);
     company.setUpdatedBy(userId);
     companyRepository.save(company);
+    return company;
+  }
+
+  @Test
+  public void testCreateCompany() {
+    Company company = createCompany();
     assertNotNull(company);
+  }
+
+  @Test
+  public void testGetCompany() {
+    Company company = createCompany();
+    assertNotNull(company);
+
+    Company company2 = companyRepository.findByName("Industria La Popular").get();
+    assertNotNull(company2);
+    assertEquals(company2.getName(), company.getName());
+  }
+
+  @Test
+  public void testDeleteCompany() {
+    Company company = createCompany();
+    companyRepository.delete(company);
+  }
+
+  @Test
+  public void testFindAllCompanies() {
+    createCompany();
+    assertNotNull(companyRepository.findAll());
+  }
+
+  @Test
+  public void deleteByCompanyIdTest() {
+    Company company = createCompany();
+    companyRepository.deleteById(company.getId());
   }
 }

@@ -46,9 +46,7 @@ public class Configuration extends UserDateAudit {
   @JsonIgnore
   private Company company;
 
-  public Configuration(Long id, @NotBlank @Size(max = 100) String name, @NotBlank @Size(max = 150) String value,
-      StatusName status, Company company) {
-    this.id = id;
+  public Configuration(String name, String value, StatusName status, Company company) {
     this.name = name;
     this.value = value;
     this.status = status;

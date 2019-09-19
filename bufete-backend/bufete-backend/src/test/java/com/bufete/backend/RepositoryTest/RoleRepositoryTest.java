@@ -22,12 +22,17 @@ public class RoleRepositoryTest {
   @Autowired
   private RoleRepository roleRepository;
 
-  @Test
-  public void testSaveRoles() {
+  private Role createRole() {
     Role role = new Role("Parent Role", StatusName.ACTIVE);
     role.setCreatedAt(Instant.now());
     role.setUpdatedAt(Instant.now());
     roleRepository.save(role);
+    return role;
+  }
+
+  @Test
+  public void testSaveRoles() {
+    Role role = createRole();
     assertNotNull(role);
   }
 
@@ -53,39 +58,27 @@ public class RoleRepositoryTest {
 
   @Test
   public void testGetRole() {
-    Role role = new Role("admin", StatusName.ACTIVE);
-    role.setCreatedAt(Instant.now());
-    role.setUpdatedAt(Instant.now());
-    roleRepository.save(role);
-    Role role2 = roleRepository.findByName("admin").get();
+    Role role = createRole();
+    Role role2 = roleRepository.findByName("Parent Role").get();
     assertNotNull(role);
     assertEquals(role2.getName(), role.getName());
   }
 
   @Test
   public void testDeleteRole() {
-    Role role = new Role("admin", StatusName.ACTIVE);
-    role.setCreatedAt(Instant.now());
-    role.setUpdatedAt(Instant.now());
-    roleRepository.save(role);
+    Role role = createRole();
     roleRepository.delete(role);
   }
 
   @Test
   public void findAllRoles() {
-    Role role = new Role("admin", StatusName.ACTIVE);
-    role.setCreatedAt(Instant.now());
-    role.setUpdatedAt(Instant.now());
-    roleRepository.save(role);
+    createRole();
     assertNotNull(roleRepository.findAll());
   }
 
   @Test
   public void deleteByRoleIdTest() {
-    Role role = new Role("admin", StatusName.ACTIVE);
-    role.setCreatedAt(Instant.now());
-    role.setUpdatedAt(Instant.now());
-    Role rol = roleRepository.save(role);
+    Role rol = createRole();
     roleRepository.deleteById(rol.getId());
   }
 }
