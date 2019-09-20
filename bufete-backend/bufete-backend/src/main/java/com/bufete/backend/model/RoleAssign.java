@@ -38,7 +38,8 @@ public class RoleAssign extends DateAudit {
   @Column(length = 10)
   private StatusName status;
 
-  public RoleAssign(User user, Role role, Company company, StatusName status) {
+  public RoleAssign(UserRoleCompanyKey id, User user, Role role, Company company, StatusName status) {
+    this.id = id;
     this.user = user;
     this.role = role;
     this.company = company;

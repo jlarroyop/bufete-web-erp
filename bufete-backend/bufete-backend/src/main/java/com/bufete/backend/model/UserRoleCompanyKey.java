@@ -17,6 +17,12 @@ public class UserRoleCompanyKey implements Serializable {
   @Column(name = "company_id")
   private Long companyId;
 
+  public UserRoleCompanyKey(Long userId, Long roleId, Long companyId) {
+    this.userId = userId;
+    this.roleId = roleId;
+    this.companyId = companyId;
+  }
+
   public UserRoleCompanyKey() {
   }
 
@@ -45,4 +51,5 @@ public class UserRoleCompanyKey implements Serializable {
   }
 
   private static final long serialVersionUID = 1L;
+
 }
