@@ -14,6 +14,11 @@ public class RoleOptionKey implements Serializable {
   @Column(name = "app_option_id")
   private Long appOptionId;
 
+  public RoleOptionKey(Long roleId, Long appOptionId) {
+    this.roleId = roleId;
+    this.appOptionId = appOptionId;
+  }
+
   public RoleOptionKey() {
   }
 
@@ -34,4 +39,5 @@ public class RoleOptionKey implements Serializable {
   }
 
   private static final long serialVersionUID = 1L;
+
 }

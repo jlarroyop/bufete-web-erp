@@ -33,7 +33,8 @@ public class RoleAppOption extends DateAudit {
   @Column(length = 10)
   private StatusName status;
 
-  public RoleAppOption(Role roleOption, AppOption appOption, StatusName status) {
+  public RoleAppOption(RoleOptionKey id, Role roleOption, AppOption appOption, StatusName status) {
+    this.id = id;
     this.roleOption = roleOption;
     this.appOption = appOption;
     this.status = status;
