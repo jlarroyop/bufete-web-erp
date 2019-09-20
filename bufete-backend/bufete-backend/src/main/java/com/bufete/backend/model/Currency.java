@@ -21,8 +21,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "concurrencies")
-public class Concurrency extends UserDateAudit {
+@Table(name = "currencies")
+public class Currency extends UserDateAudit {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,9 +50,7 @@ public class Concurrency extends UserDateAudit {
   @JsonIgnore
   private Company company;
 
-  public Concurrency(Long id, @NotBlank @Size(max = 100) String name, @NotBlank @Size(max = 10) String shortName,
-      Double exchangeValue, StatusName status, Company company) {
-    Id = id;
+  public Currency(String name, String shortName, Double exchangeValue, StatusName status, Company company) {
     this.name = name;
     this.shortName = shortName;
     this.exchangeValue = exchangeValue;
@@ -60,7 +58,7 @@ public class Concurrency extends UserDateAudit {
     this.company = company;
   }
 
-  public Concurrency() {
+  public Currency() {
   }
 
   public Long getId() {

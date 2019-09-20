@@ -2,8 +2,6 @@ package com.bufete.backend.RepositoryTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-
 import java.time.Instant;
 import java.util.List;
 
