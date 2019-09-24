@@ -14,26 +14,28 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.bufete.backend.model.audit.UserDateAudit;
+import com.bufete.backend.model.audit.DateAudit;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "companies")
-public class Company extends UserDateAudit {
+public class Company extends DateAudit {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
 	@Size(max = 150)
 	private String name;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(length = 150)
 	private StatusName status;
-	
+
 	@OneToMany(mappedBy = "company")
-  private Set<RoleAssign> registrations;
+	@JsonIgnore
+	private Set<RoleAssign> registrations;
 
 	public Company(String name, StatusName status) {
 		super();
@@ -42,7 +44,7 @@ public class Company extends UserDateAudit {
 	}
 
 	public Company() {
-		
+
 	}
 
 	public Long getId() {
@@ -68,14 +70,14 @@ public class Company extends UserDateAudit {
 	public void setStatus(StatusName status) {
 		this.status = status;
 	}
-	
+
 	public Set<RoleAssign> getRegistrations() {
 		return registrations;
 	}
-	
+
 	public void setRegistrations(Set<RoleAssign> registrations) {
 		this.registrations = registrations;
 	}
-	
+
 	private static final long serialVersionUID = 1L;
 }

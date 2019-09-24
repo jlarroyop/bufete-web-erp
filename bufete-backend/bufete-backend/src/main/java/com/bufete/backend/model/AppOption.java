@@ -47,7 +47,7 @@ public class AppOption extends DateAudit {
   private Set<AppOption> childAppOptions = new HashSet<AppOption>();
 
   @OneToMany(mappedBy = "appOption")
-  private Set<RoleAppOption> roleAppOption;
+  private Set<RoleAppOption> roleAppOption = new HashSet<RoleAppOption>();
 
   public AppOption(String name, String path, StatusName status) {
     this.name = name;

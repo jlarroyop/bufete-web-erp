@@ -47,12 +47,9 @@ public class RoleAssignRepositoryTest {
   }
 
   private Company createCompany() {
-    Long userId = (long) 1;
     Company company = new Company("Industria La Popular", StatusName.ACTIVE);
     company.setCreatedAt(Instant.now());
     company.setUpdatedAt(Instant.now());
-    company.setCreatedBy(userId);
-    company.setUpdatedBy(userId);
     companyRepository.save(company);
     return company;
   }
