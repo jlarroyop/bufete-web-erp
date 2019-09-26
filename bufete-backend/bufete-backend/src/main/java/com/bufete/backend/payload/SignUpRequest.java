@@ -1,5 +1,7 @@
 package com.bufete.backend.payload;
 
+import java.util.List;
+
 import javax.validation.constraints.*;
 
 public class SignUpRequest {
@@ -19,6 +21,10 @@ public class SignUpRequest {
     @NotBlank
     @Size(min = 6, max = 20)
     private String password;
+
+    private List<Long> rolesId;
+
+    private Long companyId;
 
     public String getName() {
         return name;
@@ -50,5 +56,21 @@ public class SignUpRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Long> getRolesId() {
+        return rolesId;
+    }
+
+    public void setRolesId(List<Long> rolesId) {
+        this.rolesId = rolesId;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 }

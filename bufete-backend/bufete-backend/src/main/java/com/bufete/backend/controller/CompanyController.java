@@ -11,9 +11,11 @@ import com.bufete.backend.service.CompanyService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,5 +41,25 @@ public class CompanyController {
   @GetMapping("/{companyId}")
   public Company getCompanyById(@PathVariable Long companyId) {
     return companyService.getCompanyById(companyId);
+  }
+
+  @PutMapping
+  public ResponseEntity<?> updateCompany(@Valid @RequestBody CompanyRequest companyRequest) {
+    Company company = companyService.updateCompany(companyRequest);
+
+    URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{companyId}").buildAndExpand(company.getId())
+        .toUri();
+
+    return ResponseEntity.created(location).body(new ApiResponse(true, "Company Updated Successfully"));
+  }
+
+  @DeleteMapping("/{companyId}")
+  public ResponseEntity<?> deleteCompany(@PathVariable Long companyId) {
+    Company company = companyService.deleteCompany(companyId);
+
+    URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{companyId}").buildAndExpand(company.getId())
+        .toUri();
+
+    return ResponseEntity.created(location).body(new ApiResponse(true, "Company Delleted Successfully"));
   }
 }

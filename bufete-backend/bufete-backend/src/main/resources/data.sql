@@ -45,7 +45,7 @@ VALUES
 INSERT INTO users
   (id, created_at, updated_at, email, name, password, status, username)
 VALUES
-  (1, NOW(), NOW(), "jlarroyop@gmail.com", "Jorge Arroyo", "$2a$10$QN6WXxKMenL7gRZxTndcnOdiY9PlnpN.yGz8hEvMW8IBfvesuEkpO", "ACTIVE", "jlarroyop");
+  (1, NOW(), NOW(), "jlarroyop@gmail.com", "Jorge Arroyo", "$2a$10$.2KH9RO41v01eF.FJV1q3utRtieRbBXJSFxVYchPrNIm54c0nJYBe", "ACTIVE", "jlarroyop");
 
 INSERT INTO user_role_company
   (company_id, role_id, user_id, created_at, updated_at, status)

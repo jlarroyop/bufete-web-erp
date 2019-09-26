@@ -29,4 +29,19 @@ public class CompanyService {
     return companyRepository.findById(companyId)
         .orElseThrow(() -> new ResourceNotFoundException("Company", "id", companyId));
   }
+
+  public Company updateCompany(CompanyRequest companyRequest) {
+    Company company = companyRepository.findById(companyRequest.getId())
+        .orElseThrow(() -> new ResourceNotFoundException("Company", "id", companyRequest.getId()));
+    company.setName(companyRequest.getName());
+    company.setStatus(companyRequest.getStatus());
+    return companyRepository.save(company);
+  }
+
+  public Company deleteCompany(Long companyId) {
+    Company company = companyRepository.findById(companyId)
+        .orElseThrow(() -> new ResourceNotFoundException("Company", "id", companyId));
+    company.setStatus(StatusName.DELETED);
+    return companyRepository.save(company);
+  }
 }
