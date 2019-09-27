@@ -16,4 +16,7 @@ public interface RoleAppOptionRepository extends JpaRepository<RoleAppOption, Ro
 
   @Query("SELECT ra.appOption FROM RoleAppOption ra WHERE ra.roleOption.id = :roleId AND ra.appOption.status = 'ACTIVE'")
   List<AppOption> getAppOptionByRoleId(@Param("roleId") Long roleId);
+
+  @Query("SELECT ao FROM RoleAppOption ra LEFT JOIN AppOption ao ON ao.id = ra.appOption.id OR ao.parent_app_option.id = ra.appOption.id WHERE ra.roleOption.id IN (:roleIds) AND ra.roleOption.status = 'ACTIVE' AND ra.appOption.status = 'ACTIVE'")
+  List<AppOption> getAppOotionByRoleIds(@Param("roleIds") List<Long> roleIds);
 }

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,6 +55,7 @@ public class UserController {
 		return new UserIdentityAvailability(isAvailable);
 	}
 
+	@PreAuthorize("hasRole('USUARIOS')")
 	@PostMapping("/assign")
 	public ResponseEntity<?> assignRoles(@Valid @RequestBody AssignRequest assignRequest) {
 		userService.assignRoles(assignRequest);

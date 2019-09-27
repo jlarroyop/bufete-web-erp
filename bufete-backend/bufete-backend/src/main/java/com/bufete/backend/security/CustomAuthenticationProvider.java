@@ -32,7 +32,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         authenticationToken.getCredentials().toString(), authenticationToken.getCompanyId())) {
       throw new BadCredentialsException("Username/Password does not match for " + authenticationToken.getPrincipal());
     }
-    UserDetails user = detailService.loadUserByUsername(authenticationToken.getPrincipal().toString());
+    UserDetails user = detailService.loadUserByUserNameAndCompanyId(authenticationToken.getPrincipal().toString(),
+        authenticationToken.getCompanyId());
     return new UsernamePasswordAuthenticationToken(user, null);
   }
 

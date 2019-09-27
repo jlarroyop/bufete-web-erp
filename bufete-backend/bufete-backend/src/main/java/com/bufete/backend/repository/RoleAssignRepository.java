@@ -23,6 +23,9 @@ public interface RoleAssignRepository extends JpaRepository<RoleAssign, UserRole
   @Query("SELECT ra.role FROM RoleAssign ra WHERE ra.user.id = :userId AND ra.company.id = :companyId AND ra.user.status = 'ACTIVE' and ra.company.status = 'ACTIVE'")
   List<Role> getRolesByUserIdAndCompanyId(@Param("userId") Long userId, @Param("companyId") Long companyId);
 
+  @Query("SELECT DISTINCT ra.role.id FROM RoleAssign ra WHERE ra.user.id = :userId AND ra.company.id = :companyId AND ra.user.status = 'ACTIVE' and ra.company.status = 'ACTIVE'")
+  List<Long> getRolesIdByUserIdAndCompanyId(@Param("userId") Long userId, @Param("companyId") Long companyId);
+
   @Query("SELECT ra.user FROM RoleAssign ra WHERE ra.user.username = :username AND ra.company.id = :companyId AND ra.user.status = 'ACTIVE' and ra.company.status = 'ACTIVE'")
   Optional<User> findUserByUsernameAndCompany(@Param("username") String username, @Param("companyId") Long companyId);
 
